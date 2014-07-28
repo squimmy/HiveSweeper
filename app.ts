@@ -2,13 +2,21 @@
     .controller('HiveController', ($scope) => {
         $scope.tiles = [
             new Tile(0, 0, false),
-            new Tile(1, 0, false),
+            new Tile(1, 0, true),
             new Tile(-1, 0, false),
-            new Tile(0, 1, false),
-            new Tile(0, -1, false),
+            new Tile(0, 1, true),
+            new Tile(0, -1, true),
             new Tile(1, 1, false),
-            new Tile(-1, -1, false)
+            new Tile(-1, -1, true)
         ];
+
+        $scope.uncover = (tile: Tile) => {
+            if (tile.isMine) {
+                alert("YOU LOSE");
+            } else {
+                alert(tile.countNearbyMines($scope.tiles));
+            }
+        }
     });
 
 class Point {
@@ -42,5 +50,10 @@ class Tile {
             new Point(-1, -1)
         ];
         return _.map(relativeNeighbours, p => new Point(p.x + this.coords.x, p.y + this.coords.y));
+    }
+
+    public countNearbyMines(tiles: Tile[]) {
+        var neighbouringTiles = _.filter(tiles, t => _.some(this.neighbours, n => n.x == t.coords.x && n.y == t.coords.y));
+        return _.countBy(neighbouringTiles, t => t.isMine)['true'];
     }
 }
