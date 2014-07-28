@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <title>Hive Sweeper</title>
     <link rel="stylesheet" href="app.css" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -16,7 +17,7 @@
     <div ng-controller="HiveController">
         <svg width="250" height="250">
             <g transform="translate(100, 100)">
-                <g ng-repeat="tile in tiles" class="tile" transform="translate({{tile.x * 26 - tile.y * 13}}, {{tile.y * 22.5}})">
+                <g ng-repeat="tile in tiles" class="tile" transform="translate({{tile.coords.x * 26 - tile.coords.y * 13}}, {{tile.coords.y * 22.5}})">
                     <polygon points="13,-7.5 13,7.5 0,15 -13,7.5 -13,-7.5 0,-15"></polygon>
                 </g>
             </g>
