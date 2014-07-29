@@ -6,8 +6,8 @@
             new Tile(-1, 0, false),
             new Tile(0, 1, true),
             new Tile(0, -1, true),
-            new Tile(1, 1, false),
-            new Tile(-1, -1, true)
+            new Tile(1, -1, false),
+            new Tile(-1, 1, true),
         ];
 
         _.forEach($scope.tiles, t => t['init']($scope.tiles));
