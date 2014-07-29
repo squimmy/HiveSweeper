@@ -3,3 +3,9 @@
     stroke: darkblue;
     stroke-width: 0.5px;
 }
+
+text {
+    text-anchor: middle;
+    fill: black;
+    stroke-width: 0;
+}

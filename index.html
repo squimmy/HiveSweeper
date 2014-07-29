@@ -15,10 +15,11 @@
 
     <div id="content"></div>
     <div ng-controller="HiveController">
-        <svg width="250" height="250">
+        <svg width="500" height="500">
             <g transform="translate(100, 100)">
                 <g ng-repeat="tile in tiles" class="tile" ng-click="uncover(tile)" transform="translate({{tile.coords.x * 26 - tile.coords.y * 13}}, {{tile.coords.y * 22.5}})">
                     <polygon points="13,-7.5 13,7.5 0,15 -13,7.5 -13,-7.5 0,-15"></polygon>
+                    <text ng-show="tile.uncovered" y="0.35em">{{tile.neighbouringMineCount}}</text>
                 </g>
             </g>
         </svg>
