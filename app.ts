@@ -10,11 +10,16 @@
             new Tile(-1, -1, true)
         ];
 
+        _.forEach($scope.tiles, t => t['init']($scope.tiles));
+
         $scope.uncover = (tile: Tile) => {
             if (tile.isMine) {
                 alert("YOU LOSE");
             } else {
-                alert(tile.countNearbyMines($scope.tiles));
+                tile.uncovered = true;
+                if (tile.neighbouringMineCount == 0) {
+                    _.forEach(tile.neighbours, t => t.uncovered = true);
+                }
             }
         }
     });
@@ -32,15 +37,16 @@ class Point {
 class Tile {
     public coords: Point;
     public isMine: boolean;
-    public neighbours: Point[];
+    public neighbours: Tile[];
+    public neighbouringMineCount: number;
+    public uncovered: boolean;
 
     constructor(x, y, isMine) {
         this.coords = new Point(x, y);
         this.isMine = isMine;
-        this.neighbours = this.getNeighbours();
     }
 
-    private getNeighbours() {
+    public init(tiles: Tile[]) {
         var relativeNeighbours = [
             new Point(1, 0),
             new Point(1, 1),
@@ -49,11 +55,8 @@ class Tile {
             new Point(-1, 0),
             new Point(-1, -1)
         ];
-        return _.map(relativeNeighbours, p => new Point(p.x + this.coords.x, p.y + this.coords.y));
-    }
-
-    public countNearbyMines(tiles: Tile[]) {
-        var neighbouringTiles = _.filter(tiles, t => _.some(this.neighbours, n => n.x == t.coords.x && n.y == t.coords.y));
-        return _.countBy(neighbouringTiles, t => t.isMine)['true'];
+        var neighbours = _.map(relativeNeighbours, p => new Point(p.x + this.coords.x, p.y + this.coords.y));
+        this.neighbours = _.filter(tiles, t => _.some(neighbours, n => n.x == t.coords.x && n.y == t.coords.y));
+        this.neighbouringMineCount = _.filter(this.neighbours, t => t.isMine).length;
     }
 }
