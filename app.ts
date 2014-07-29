@@ -1,15 +1,13 @@
 ﻿angular.module('hivesweeper', [])
     .controller('HiveController', ($scope) => {
-        $scope.tiles = [
-            new Tile(0, 0, false),
-            new Tile(1, 0, true),
-            new Tile(-1, 0, false),
-            new Tile(0, 1, true),
-            new Tile(0, -1, true),
-            new Tile(1, -1, false),
-            new Tile(-1, 1, true),
-        ];
+        var radius = 2;
+        $scope.tiles = _.flatten(_.map(
+            _.range(-radius, radius + 1),
+            x => _.map(
+                _.range(Math.max(-radius, x - radius), Math.min(radius, x + radius) + 1),
+                y => new Tile(y, x, false))));
 
+        _.forEach(_.sample($scope.tiles, 6), t => t['isMine'] = true);
         _.forEach($scope.tiles, t => t['init']($scope.tiles));
 
         $scope.uncover = (tile: Tile) => {
