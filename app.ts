@@ -14,10 +14,7 @@
             if (tile.isMine) {
                 alert("YOU LOSE");
             } else {
-                tile.uncovered = true;
-                if (tile.neighbouringMineCount == 0) {
-                    _.forEach(tile.neighbours, t => t.uncovered = true);
-                }
+                tile.uncover();
             }
         }
     });
@@ -42,6 +39,13 @@ class Tile {
     constructor(x, y, isMine) {
         this.coords = new Point(x, y);
         this.isMine = isMine;
+    }
+
+    public uncover() {
+        this.uncovered = true;
+        if (this.neighbouringMineCount == 0) {
+            _.forEach(_.filter(this.neighbours, tile => !tile.uncovered), t => t.uncover());
+        }
     }
 
     public init(tiles: Tile[]) {
