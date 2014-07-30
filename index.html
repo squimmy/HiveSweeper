@@ -12,26 +12,27 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Hive Sweeper</h1>
+    <div class="container-fluid">
+        <h1>Hive Sweeper</h1>
 
-    <div id="content"></div>
-    <div ng-controller="HiveController">
-        <svg width="500" height="500">
-            <g transform="translate(100, 100)">
-                <g ng-repeat="tile in tiles" class="tile" ng-click="tile.uncover()" ng-right-click="tile.flag()" transform="translate({{tile.coords.x * 26 - tile.coords.y * 13}}, {{tile.coords.y * 22.5}})">
-                    <polygon points="13,-7.5 13,7.5 0,15 -13,7.5 -13,-7.5 0,-15"></polygon>
-                    <text ng-show="tile.uncovered" y="0.35em">{{tile.neighbouringMineCount}}</text>
-                    <g class="flag" ng-show="tile.flagged" transform="scale(.4) translate(-25,-25)">
-                        <path d="M10,10
-                                 C20,5 40,15 50,10
-                                 C40,20 20,10 12,20
-                                 Z" />
-                        <path d="M12,20
-                                 L18,50" />
+        <div ng-controller="HiveController" style="height: 100%">
+            <svg width="100%" height="90%">
+                <g transform="{{transform.text()}}">
+                    <g ng-repeat="tile in tiles" class="tile" ng-click="tile.uncover()" ng-right-click="tile.flag()" transform="translate({{tile.coords.x * 26 - tile.coords.y * 13}}, {{tile.coords.y * 22.5}})">
+                        <polygon points="13,-7.5 13,7.5 0,15 -13,7.5 -13,-7.5 0,-15"></polygon>
+                        <text ng-show="tile.uncovered" y="0.35em">{{tile.neighbouringMineCount}}</text>
+                        <g class="flag" ng-show="tile.flagged" transform="scale(.4) translate(-25,-25)">
+                            <path d="M10,10
+                                     C20,5 40,15 50,10
+                                     C40,20 20,10 12,20
+                                     Z" />
+                            <path d="M12,20
+                                     L18,50" />
+                        </g>
                     </g>
                 </g>
-            </g>
-        </svg>
+            </svg>
+        </div>
     </div>
 </body>
 </html>
