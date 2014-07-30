@@ -4,6 +4,12 @@
     stroke-width: 0.5px;
 }
 
+.flag {
+    stroke: black;
+    stroke-width: 1px;
+    fill: red;
+}
+
 text {
     text-anchor: middle;
     fill: black;
