@@ -9,14 +9,6 @@
 
         _.forEach(_.sample($scope.tiles, 6), t => t['isMine'] = true);
         _.forEach($scope.tiles, t => t['init']($scope.tiles));
-
-        $scope.uncover = (tile: Tile) => {
-            if (tile.isMine) {
-                alert("YOU LOSE");
-            } else {
-                tile.uncover();
-            }
-        }
     });
 
 class Point {
@@ -44,9 +36,14 @@ class Tile {
 
     public uncover() {
         if (this.flagged) return;
-        this.uncovered = true;
-        if (this.neighbouringMineCount == 0) {
-            _.forEach(_.filter(this.neighbours, tile => !tile.uncovered), t => t.uncover());
+
+        if (this.isMine) {
+            alert("YOU LOSE");
+        } else {
+            this.uncovered = true;
+            if (this.neighbouringMineCount == 0) {
+                _.forEach(_.filter(this.neighbours, tile => !tile.uncovered), t => t.uncover());
+            }
         }
     }
 
