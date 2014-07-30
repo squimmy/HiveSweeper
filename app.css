@@ -14,4 +14,10 @@ text {
     text-anchor: middle;
     fill: black;
     stroke-width: 0;
+    cursor: default;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
