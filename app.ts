@@ -6,8 +6,8 @@
             x => _.map(
                 _.range(Math.max(-radius, x - radius), Math.min(radius, x + radius) + 1),
                 y => new Tile(y, x, false))));
-        _.forEach(_.sample($scope.tiles, 6), t => t['isMine'] = true);
-        _.forEach($scope.tiles, t => t['init']($scope.tiles));
+        _.forEach(_.sample($scope.tiles, 6), (t: any) => t.isMine = true);
+        _.forEach($scope.tiles, (t: any) => t.init($scope.tiles));
 
         $scope.transform = new Transform();
 
