@@ -1,4 +1,4 @@
-﻿angular.module('hivesweeper', [])
+﻿angular.module('hivesweeper', ['directives'])
     .controller('HiveController', ($scope) => {
         var radius = 2;
         $scope.tiles = _.flatten(_.map(
