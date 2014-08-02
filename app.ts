@@ -125,3 +125,25 @@ class Tile {
         this.neighbouringMineCount = _.filter(this.neighbours, t => t.isMine).length;
     }
 }
+
+class Difficulty {
+    public hiveRadius: number;
+    public mineCount: number;
+    public name: string;
+
+    constructor(radius: number, mines: number, name: string) {
+        this.hiveRadius = radius;
+        this.mineCount = mines;
+        this.name = name;
+    }
+
+    static easy() {
+        return new Difficulty(3, 5, 'Easy');
+    }
+    static medium() {
+        return new Difficulty(5, 15, 'Medium');
+    }
+    static hard() {
+        return new Difficulty(7, 25, 'Hard');
+    }
+}
