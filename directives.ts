@@ -17,6 +17,7 @@
                 closeOnEscape: false,
                 dialogClass: 'no-title-bar',
                 autoOpen: false,
+                modal: true,
                 buttons: [{
                     text: $attrs.buttonText,
                     click: () => $scope.$apply(() => {
