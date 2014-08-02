@@ -16,12 +16,13 @@
             _.forEach($scope.tiles, (t: any) => t.init($scope.tiles, () => {
                 $scope.showLoseDialog = true;
             }));
+            $scope.transform = new Transform();
+            if ($scope.updateTransform != null) $timeout($scope.updateTransform, 50);
         }
 
         $scope.showLoseDialog = false;
         $scope.startGame();
 
-        $scope.transform = new Transform();
         var svg: any = document.getElementsByTagName('svg')[0];
         $scope.updateTransform = () => {
             var root = svg.firstElementChild;
