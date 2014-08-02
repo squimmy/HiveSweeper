@@ -41,7 +41,10 @@
         $scope.remainingMineCount = () => {
             return _.filter($scope.tiles, (t: any) => t.isMine && !t.flagged).length
         }
-        $scope.startNewGame = () => { alert('NEW GAME?!'); };
+        $scope.startNewGame = () => {
+            $scope.startGame();
+            $scope.showLoseDialog = false;
+        };
         angular.element(window).bind('resize', $scope.updateTransform);
         $timeout($scope.updateTransform, 50);
     });
