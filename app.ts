@@ -12,8 +12,8 @@
                 x => _.map(
                     _.range(Math.max(-radius, x - radius), Math.min(radius, x + radius) + 1),
                     y => new Tile(y, x, false))));
-            _.forEach(_.sample($scope.tiles, $scope.difficulty.mineCount), (t: any) => t.isMine = true);
-            _.forEach($scope.tiles, (t: any) => t.init($scope.tiles, () => {
+            _.forEach(_.sample($scope.tiles, $scope.difficulty.mineCount), (t: Tile) => t.isMine = true);
+            _.forEach($scope.tiles, (t: Tile) => t.init($scope.tiles, () => {
                 $scope.showLoseDialog = true;
             }));
             $scope.transform = new Transform();
@@ -40,7 +40,7 @@
         };
 
         $scope.remainingMineCount = () => {
-            return _.filter($scope.tiles, (t: any) => t.isMine && !t.flagged).length
+            return _.filter($scope.tiles, (t: Tile) => t.isMine && !t.flagged).length
         }
         $scope.startNewGame = () => {
             $scope.startGame();
