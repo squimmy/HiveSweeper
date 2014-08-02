@@ -35,6 +35,11 @@
                     </g>
                 </g>
             </svg>
+            <div ng-dialog is-open="{{showLoseDialog}}"
+                 button-text="Start new game" button-action="startNewGame()">
+                <h2>You Lose!</h2>
+                <p>There were {{remainingMineCount()}} mines remaining.</p>
+            </div>
         </div>
     </div>
 </body>

@@ -1,13 +1,16 @@
 ﻿angular.module('hivesweeper', ['directives'])
     .controller('HiveController', ($scope, $timeout) => {
         var radius = 2;
+        $scope.showLoseDialog = false;
         $scope.tiles = _.flatten(_.map(
             _.range(-radius, radius + 1),
             x => _.map(
                 _.range(Math.max(-radius, x - radius), Math.min(radius, x + radius) + 1),
                 y => new Tile(y, x, false))));
         _.forEach(_.sample($scope.tiles, 6), (t: any) => t.isMine = true);
-        _.forEach($scope.tiles, (t: any) => t.init($scope.tiles));
+        _.forEach($scope.tiles, (t: any) => t.init($scope.tiles, () => {
+            $scope.showLoseDialog = true;
+        }));
 
         $scope.transform = new Transform();
 
@@ -26,6 +29,11 @@
                 });
             }
         };
+
+        $scope.remainingMineCount = () => {
+            return _.filter($scope.tiles, (t: any) => t.isMine && !t.flagged).length
+        }
+        $scope.startNewGame = () => { alert('NEW GAME?!'); };
         angular.element(window).bind('resize', $scope.updateTransform);
         $timeout($scope.updateTransform, 50);
     });
@@ -76,6 +84,7 @@ class Tile {
     public neighbouringMineCount: number;
     public uncovered: boolean;
     public flagged: boolean;
+    private lose: () => void;
 
     constructor(x, y, isMine) {
         this.coords = new Point(x, y);
@@ -86,7 +95,7 @@ class Tile {
         if (this.flagged) return;
 
         if (this.isMine) {
-            alert("YOU LOSE");
+            this.lose();
         } else {
             this.uncovered = true;
             if (this.neighbouringMineCount == 0) {
@@ -100,7 +109,9 @@ class Tile {
         this.flagged = !this.flagged;
     }
 
-    public init(tiles: Tile[]) {
+    public init(tiles: Tile[], lose: () => void) {
+        this.lose = lose;
+
         var relativeNeighbours = [
             new Point(1, 0),
             new Point(1, 1),
