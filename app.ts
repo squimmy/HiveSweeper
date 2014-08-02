@@ -1,19 +1,27 @@
 ﻿angular.module('hivesweeper', ['directives'])
     .controller('HiveController', ($scope, $timeout) => {
-        var radius = 2;
+        $scope.easy = Difficulty.easy();
+        $scope.medium = Difficulty.medium();
+        $scope.hard = Difficulty.hard();
+        $scope.difficulty = $scope.easy;
+
+        $scope.startGame = () => {
+            var radius = $scope.difficulty.hiveRadius;
+            $scope.tiles = _.flatten(_.map(
+                _.range(-radius, radius + 1),
+                x => _.map(
+                    _.range(Math.max(-radius, x - radius), Math.min(radius, x + radius) + 1),
+                    y => new Tile(y, x, false))));
+            _.forEach(_.sample($scope.tiles, $scope.difficulty.mineCount), (t: any) => t.isMine = true);
+            _.forEach($scope.tiles, (t: any) => t.init($scope.tiles, () => {
+                $scope.showLoseDialog = true;
+            }));
+        }
+
         $scope.showLoseDialog = false;
-        $scope.tiles = _.flatten(_.map(
-            _.range(-radius, radius + 1),
-            x => _.map(
-                _.range(Math.max(-radius, x - radius), Math.min(radius, x + radius) + 1),
-                y => new Tile(y, x, false))));
-        _.forEach(_.sample($scope.tiles, 6), (t: any) => t.isMine = true);
-        _.forEach($scope.tiles, (t: any) => t.init($scope.tiles, () => {
-            $scope.showLoseDialog = true;
-        }));
+        $scope.startGame();
 
         $scope.transform = new Transform();
-
         var svg: any = document.getElementsByTagName('svg')[0];
         $scope.updateTransform = () => {
             var root = svg.firstElementChild;
