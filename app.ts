@@ -1,4 +1,4 @@
-﻿angular.module('hivesweeper', ['directives'])
+﻿angular.module('hivesweeper', ['directives', 'ui.bootstrap'])
     .controller('HiveController', ($scope, $timeout) => {
         $scope.easy = Difficulty.easy();
         $scope.medium = Difficulty.medium();
