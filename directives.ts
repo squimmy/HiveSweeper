@@ -9,4 +9,27 @@
                 });
             });
         };
+    })
+    .directive('ngDialog', ($parse) => {
+        return ($scope, $element, $attrs) => {
+            var fn = $parse($attrs.buttonAction);
+            $($element).dialog({
+                closeOnEscape: false,
+                autoOpen: false,
+                buttons: [{
+                    text: $attrs.buttonText,
+                    click: () => $scope.$apply(() => {
+                        fn($scope);
+                    })
+                }]
+            });
+
+            $attrs.$observe('isOpen', x => {
+                if ($parse(x)()) {
+                    $($element).dialog('open');
+                } else {
+                    $($element).dialog('close');
+                }
+            });
+        };
     });
