@@ -1,4 +1,12 @@
-﻿.tile {
+﻿html, body {
+    height: 100%;
+}
+
+.container-fluid{
+    height: 100%;
+}
+
+.tile {
     fill: gold;
     stroke: darkblue;
     stroke-width: 0.5px;
