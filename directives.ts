@@ -34,4 +34,12 @@
                 }
             });
         };
+    })
+    .directive('difficultyPicker', () => {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: false,
+            templateUrl: 'difficultyPicker.html',
+        };
     });

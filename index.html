@@ -43,15 +43,7 @@
                 <p>There were {{remainingMineCount()}} mines remaining.</p>
                 <br />
                 Pick a difficulty:
-
-                <div class="btn-group">
-                    <label class="btn btn-default" ng-model="difficulty"
-                           btn-radio="easy">Easy</label>
-                    <label class="btn btn-default" ng-model="difficulty"
-                           btn-radio="medium">Medium</label>
-                    <label class="btn btn-default" ng-model="difficulty"
-                           btn-radio="hard">Hard</label>
-                </div>
+                <difficulty-picker />
             </div>
         </div>
     </div>
