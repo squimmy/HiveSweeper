@@ -45,6 +45,14 @@
                 Pick a difficulty:
                 <difficulty-picker />
             </div>
+            <div ng-dialog is-open="{{showWinDialog}}"
+                 button-text="Start new game" button-action="startNewGame()">
+                <h2>You Won!</h2>
+                <p>Congratulations!</p>
+                <br />
+                Pick a difficulty:
+                <difficulty-picker />
+            </div>
         </div>
     </div>
 </body>

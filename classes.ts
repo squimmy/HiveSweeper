@@ -45,6 +45,7 @@ class Tile {
     public uncovered: boolean;
     public flagged: boolean;
     private lose: () => void;
+    private tryWin: () => void;
 
     constructor(x, y, isMine) {
         this.coords = new Point(x, y);
@@ -61,6 +62,7 @@ class Tile {
             if (this.neighbouringMineCount == 0) {
                 _.forEach(_.filter(this.neighbours, tile => !tile.uncovered), t => t.uncover());
             }
+            this.tryWin();
         }
     }
 
@@ -69,8 +71,9 @@ class Tile {
         this.flagged = !this.flagged;
     }
 
-    public init(tiles: Tile[], lose: () => void) {
+    public init(tiles: Tile[], lose: () => void, tryWin: () => void) {
         this.lose = lose;
+        this.tryWin = tryWin;
 
         var relativeNeighbours = [
             new Point(1, 0),

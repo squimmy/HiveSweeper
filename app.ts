@@ -14,13 +14,19 @@
                     y => new Tile(y, x, false))));
             _.forEach(_.sample($scope.tiles, $scope.difficulty.mineCount), (t: Tile) => t.isMine = true);
             _.forEach($scope.tiles, (t: Tile) => t.init($scope.tiles, () => {
-                $scope.showLoseDialog = true;
-            }));
+                    $scope.showLoseDialog = true;
+                },
+                () => {
+                    if (_.all($scope.tiles, (t: Tile) => t.isMine || t.uncovered)) {
+                        $scope.showWinDialog = true;
+                    }
+                }));
             $scope.transform = new Transform();
             if ($scope.updateTransform != null) $timeout($scope.updateTransform, 50);
         }
 
         $scope.showLoseDialog = false;
+        $scope.showWinDialog = false;
         $scope.startGame();
 
         var svg: any = document.getElementsByTagName('svg')[0];
@@ -45,6 +51,7 @@
         $scope.startNewGame = () => {
             $scope.startGame();
             $scope.showLoseDialog = false;
+            $scope.showWinDialog = false;
         };
         angular.element(window).bind('resize', $scope.updateTransform);
         $timeout($scope.updateTransform, 50);
