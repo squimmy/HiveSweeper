@@ -15,6 +15,7 @@
             var fn = $parse($attrs.buttonAction);
             $($element).dialog({
                 closeOnEscape: false,
+                dialogClass: 'no-title-bar',
                 autoOpen: false,
                 buttons: [{
                     text: $attrs.buttonText,

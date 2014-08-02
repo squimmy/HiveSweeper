@@ -29,3 +29,7 @@ text {
     user-select: none;
     -webkit-touch-callout: none;
 }
+
+.no-title-bar .ui-dialog-titlebar {
+  display: none;
+}
