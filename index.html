@@ -25,7 +25,7 @@
                 <g transform="{{transform.text()}}">
                     <g ng-repeat="tile in tiles" class="tile" ng-click="tile.uncover()" ng-right-click="tile.flag()" transform="translate({{tile.coords.x * 26 - tile.coords.y * 13}}, {{tile.coords.y * 22.5}})">
                         <polygon points="13,-7.5 13,7.5 0,15 -13,7.5 -13,-7.5 0,-15"></polygon>
-                        <text ng-show="tile.uncovered" y="0.35em">{{tile.neighbouringMineCount}}</text>
+                        <text ng-show="tile.uncovered" ng-class="'mine-' + tile.neighbouringMineCount" y="0.35em">{{tile.neighbouringMineCount}}</text>
                         <g class="flag" ng-show="tile.flagged" transform="scale(.4) translate(-25,-25)">
                             <path d="M10,10
                                      C20,5 40,15 50,10

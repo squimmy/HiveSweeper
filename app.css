@@ -30,6 +30,35 @@ text {
     -webkit-touch-callout: none;
 }
 
+
+.mine-0 {
+    fill: darkorange;
+}
+
+.mine-1 {
+    fill: darkblue;
+}
+
+.mine-2 {
+    fill: green;
+}
+
+.mine-3 {
+    fill: red;
+}
+
+.mine-4 {
+    fill: black;
+}
+
+.mine-5 {
+    fill: darkred;
+}
+
+.mine-6 {
+    fill: darkgreen;
+}
+
 .no-title-bar .ui-dialog-titlebar {
   display: none;
 }
